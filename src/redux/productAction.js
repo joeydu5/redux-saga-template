@@ -4,6 +4,5 @@ export const productList = (data) => {
   console.log(data);
   return {
     type: PRODUCT_LIST,
-    data,
   };
 };

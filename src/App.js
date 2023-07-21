@@ -7,7 +7,7 @@ import { productList } from "./redux/productAction";
 
 function App() {
   const dispatch = useDispatch();
-  const result = useSelector((state) => state.cartReducer);
+  const result = useSelector((state) => state.productReducer);
   console.log("result", result);
   const data = {
     id: 1,
@@ -15,10 +15,6 @@ function App() {
     number: 5,
   };
 
-  const dataList = {
-    id: 1,
-    list: "ok",
-  };
   const id = 1;
   return (
     <div className="App">
@@ -40,11 +36,34 @@ function App() {
       <button>Empty cart</button>
       <button
         onClick={() => {
-          dispatch(productList(dataList));
+          dispatch(productList());
         }}
       >
         Call product list
       </button>
+      <div>
+        {result.map((each) => (
+          <div key={each.photo}>
+            <img src={each.photo} alt={each.id} width="200px" />
+            <p>name:{each.name}</p>
+            <p>Color: {each.color}</p>
+            <button
+              onClick={() => {
+                dispatch(Add_To_Cart(each));
+              }}
+            >
+              Add to Cart
+            </button>
+            <button
+              onClick={() => {
+                dispatch(Remove_From_Cart(each.id));
+              }}
+            >
+              Remove from Cart
+            </button>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }

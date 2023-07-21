@@ -5,12 +5,11 @@ export const cartReducer = (data = [], action) => {
       console.log("action", action);
       return [...data, action.payload];
     case REMOVE_FROM_CART:
+      console.log("remove", data);
       let newData;
-      newData = data.forEach((each) => {
-        if (each.id !== action.id) {
-          return each;
-        }
-      });
+      newData = data.filter((each) => each.id !== action.id);
+      console.log("remove2", data);
+      console.log("remove2 newData", newData);
       if (newData === undefined) {
         newData = [];
       }
